@@ -1,0 +1,215 @@
+/* 設定變數 ---------------------------------- */
+:root {
+  --purple3: #ccccff;
+  --purple2: #6460ff;
+  --purple1: #2e1ed3;
+  --white: #ffffff;
+  --Gy1: #e4ebf5;
+  --Gy2: #c8d0e7;
+  --Gy3: #bec8e4;
+  --greyDark: #9baacf; 
+  --navbar-background: rgba(255, 255, 255, 0.808);
+  --navbar-shadow: rgba(128, 128, 128, 0.322);
+}
+
+/* 設定變數 ---------------------------------- */
+
+
+
+.blank{
+	width:100%;
+	height:200px;
+}
+
+.row{
+	padding-right:15px;
+	background: var(--Gy1);
+	border-radius: 3rem;
+	box-shadow: 0.8rem 0.8rem 1.4rem #c8d0e7, -0.2rem -0.2rem 1.8rem white;
+	position: relative;
+    overflow: hidden;
+}
+
+.card-body{
+	width: 100%;
+height: 20vh;
+object-fit: cover;
+}
+
+
+.iconEdit{
+	margin-left: auto;
+	margin-bottom: 15px;
+	width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--Gy2), -0.2rem -0.2rem 0.5rem var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--Gy4);
+  transition: all 0.5s ease;
+}
+
+.iconEdit:active{
+  box-shadow: inset 0.2rem 0.2rem 0.5rem var(--Gy2), inset -0.2rem -0.2rem 0.5rem var(--white);
+  color: var(--purple2);
+}
+.iconEdit:hover{
+  color: var(--purple2);
+  background-color: var(--purple3);
+}
+
+.iconEdit img {
+    width: 75%;
+    height: 75%;
+}
+
+.left-main{
+	display: flex;
+  justify-content: center;
+  align-items: center;
+	color: var(--purple1);
+    font-size: 2.2rem;
+    
+}
+
+.right-main{
+     font-size: 1.8rem;
+}
+
+/*表格中的第一個tr : 虛擬選擇器*/
+.right-main .row:nth-child(odd){background-color:#ccccff;}
+  /*表格中的偶數對 tr*/
+.right-main .row:nth-child(even){background-color:#ffffff;}
+
+.open_line{
+	text-align:center;
+	height:px;
+}
+
+.has_children {
+	
+    cursor: pointer;
+  }
+  
+.ch {
+    display: none;
+    width: 300px;
+    float: left;
+    color: #000;
+  }
+
+input {
+    width: 100%;
+    height: 30px;
+}
+
+.food-edit{
+  display: flex;
+  padding: 5px;
+  height: 150px;
+}
+
+.food-plus{
+	margin-top:15px;
+	margin-right:26px;
+	width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--Gy2), -0.2rem -0.2rem 0.5rem var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--Gy4);
+  transition: all 0.5s ease;
+}
+
+.food-plus:active{
+  box-shadow: inset 0.2rem 0.2rem 0.5rem var(--Gy2), inset -0.2rem -0.2rem 0.5rem var(--white);
+  color: var(--purple2);
+}
+.food-plus:hover{
+  color: var(--purple2);
+  background-color: var(--purple3);
+}
+
+.food-plus img {
+	width:50%;
+	height:50%;
+}
+
+.item {
+  border-radius: 1rem;
+  box-shadow: inset 0.2rem 0.2rem 0.5rem var(--Gy2), inset -0.2rem -0.2rem 0.5rem var(--white);
+  flex: 1;
+  background-color: #ffffff;
+  margin: 5px;
+  overflow-y:hidden;
+  margin-right: calc(100% - 485px);
+  padding: 10px;
+  
+}
+
+/*解決滾動條推擠問題*/
+.item:hover {
+	overflow-y: overlay;
+	}
+
+  /*滾動條樣式*/
+
+/*滾動條的寬度*/
+.item::-webkit-scrollbar {
+width:3px;
+height:3px;
+padding-right:100px;
+}
+
+.item::-webkit-scrollbar-thumb {
+background-color:#dddddd;
+background-clip:padding-box;
+min-height:28px;
+}
+
+.item select {
+	margin: 8px 0 0 8px;
+	width:60%;
+}
+
+.item div {
+	font-size:1.4rem;
+}
+
+div .diarys-style {
+	margin:8px 0;
+    flex: 0 0 auto;
+    height: 230px;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+div .diarys-style:hover {
+	overflow-y:scroll;
+	}
+
+/*滾動條樣式*/
+
+/*滾動條的寬度*/
+div .diarys-style::-webkit-scrollbar {
+	width:3px;
+	height:3px;
+}
+
+div .diarys-style::-webkit-scrollbar-thumb {
+	background-color:#dddddd;
+	background-clip:padding-box;
+	min-height:28px;
+}
+
+
+
+

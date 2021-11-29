@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" style="overflow: hidden;">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>playPage</title>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+  <link rel="stylesheet" href="/playPage/css/playPage.css">
+  <script type="text/javascript" src="/playPage/js/playPage.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:800" rel="stylesheet">
+</head>
+	
+<body>
+	<script th:inline="javascript">
+	/*<![CDATA[*/
+	
+	    var fitActivityId = /*[[${fitActivityId}]]*/ 'default';
+	    var fitAchieveId = /*[[${fitAchieveId}]]*/ 'default';
+	
+	/*]]>*/
+	</script>
+  <!-- Menu Start -->
+ <header th:replace="fragments/header::myHeader"></header>
+  <!-- Menu End -->
+  <!-- Main Start -->
+  <div class="container">
+    <div class="side w800">
+      <div class="character">
+        <img th:src="@{${avatar.imagePath}}" alt="">
+      </div>
+      <!-- synchronousData -->
+      <div class="weightGoal">
+        <div>
+          <p>Current Weight</p>
+          <div class="boxTemplate">
+            <p th:text ="${healthRecord.weight} + 'KG'">75kg</p>
+          </div>
+        </div>
+        <div>
+          <p> Start</p>
+          <div class="boxTemplate">
+            <p th:utext="${personalGoal.startWeight} + 'KG'">75kg</p>
+          </div>
+        </div>
+        <div>
+          <p>Goal</p>
+          <div class="boxTemplate">
+            <p th:utext="${personalGoal.goalWeight} + 'KG'">75kg</p>
+          </div>
+        </div>
+      </div>
+      <h1>Directions</h1>
+      <div class="posture">
+        
+        <p th:utext="${fitActivity.description}">
+          • Going for a walk, bike, or run (join our indoor walking program).<br>
+          • Doing household chores.<br>
+          • Taking the stairs instead of the elevator.<br>
+          • Playing at the park.<br>
+          • Raking leaves or shovelling snow.<br>
+          • Going for a walk, bike, or run (join our indoor walking program).<br>
+          • Doing household chores.<br>
+          • Taking the stairs instead of the elevator.<br>
+          • Playing at the park.<br>
+          • Raking leaves or shovelling snow.<br>
+          
+          
+        </p>
+      </div>
+      <div>
+      </div>
+    </div>
+    <div class="content w800">
+      <div class="c-video w800">
+        <h1 th:utext="${fitActivity.name}"></h1>
+        <!-- <video class="video" preload="auto" th:src="'http://192.168.1.2:8081/video/stream/mp4/' + ${videoPath}" controls></video> -->
+        <video class="video" preload="auto" th:src="'/videos/Fit_activity/' + ${videoPath} + '.mp4' + '/ '"></video>
+        <div class="controls">
+          <div class="orangeBar">
+            <div class="orangeJuice"></div>
+          </div>
+          <div class="buttons">
+            <button id="playPause"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Main End -->
+
+
+
+
+<div id="myModal" class="modal">
+
+  <div class="welcome-modal-content">
+<!--     <span class="close">&times;</span> -->
+    <span class="close"></span>
+    <img src="/index/images/newbieFriendly.png" alt="">
+    <div class="welcome-modal-content-title">Welcome to Follow-Along Workout </div>
+    <div class="welcome-modal-content-text">Please follow along the workout video and <span style="color:red">make sure you complete the entire video.</span></div>
+  	<div class="welcome-modal-content-bottom"><button class="welcome-modal-content-bottom-close">Get Started</button></div>
+  </div>
+
+  <div class="welcome-modal-content finish">
+    <!--     <span class="close">&times;</span> -->
+        <span class="close"></span>
+        
+        <div class="welcome-modal-content-title">You have completed the challenge !</div>
+        <img src="https://cdn-icons-png.flaticon.com/512/709/709510.png" width="20%" alt="">
+        <div class="welcome-modal-content-text">Redirects to user page after <span id="countDown">5</span> seconds...</div>
+        <!-- <div class="welcome-modal-content-bottom"><button class="welcome-modal-content-bottom-close">User Page</button></div> -->
+      </div>
+
+</div>
+
+
+  <!-- Copyright Start -->
+   <footer th:replace="fragments/footer::myFooter"></footer>
+  <!-- Copyright End -->
+  <script src="/playPage/js/playPage.js"></script>
+</body>
+
+</html>

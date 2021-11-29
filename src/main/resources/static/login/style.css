@@ -1,0 +1,167 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+/*  */
+
+/* 分段三選一健身計算 */
+.segmented-control {
+  margin: 2rem auto;
+  width: 40.8rem;
+  height: 6rem;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+    -0.2rem -0.2rem 0.5rem var(--white);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+  position: relative;
+}
+.segmented-control input {
+  display: none;
+}
+
+
+.segmented-control:first-child {
+  padding-left:3.4rem;
+}
+/* .segmented-control > input:checked + label {
+  transition: all 0.5s ease;
+  color: var(--primary);
+} */
+.segmented-control__1,
+.segmented-control__2,
+.segmented-control__3,
+.segmented-control__4,
+.segmented-control__5,
+.segmented-control__6 {
+  width: 6.8rem;
+  height: 3.6rem;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: var(--greyDark);
+  transition: all 0.5s ease;
+}
+/* .segmented-control__1:hover, .segmented-control__2:hover, .segmented-control__3:hover {
+  background-color: var(--greyLight-3);
+} */
+
+
+
+
+.segmented-control__color {
+  position: absolute;
+  height: 5rem;
+  width: 6.2rem;
+  margin-left: 0.3rem;
+  border-radius: 1rem;
+  box-shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+    -0.2rem -0.2rem 0.5rem var(--white);
+  /* pointer-events: none; */
+}
+
+#tab2-1:checked ~ .segmented-control__color,
+#tab3-1:checked ~ .segmented-control__color {
+  transform: translateX(0);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab2-2:checked ~ .segmented-control__color,
+#tab3-2:checked ~ .segmented-control__color {
+  transform: translateX(6.8rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab2-3:checked ~ .segmented-control__color,
+#tab3-3:checked ~ .segmented-control__color {
+  transform: translateX(13.6rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab2-4:checked ~ .segmented-control__color,
+#tab3-4:checked ~ .segmented-control__color {
+  transform: translateX(20.4rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab2-5:checked ~ .segmented-control__color,
+#tab3-5:checked ~ .segmented-control__color {
+  transform: translateX(27.2rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab2-6:checked ~ .segmented-control__color,
+#tab3-6:checked ~ .segmented-control__color {
+  transform: translateX(34rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* 選角色顏色 */
+.pink{
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #FF9398;
+}
+
+.red{
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #FF353B;
+}
+
+.blue{
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #23B5F3;
+}
+
+.purple{
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #6460FF;
+}
+
+.lightpurple{
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: #CCCCFF;
+}
+
+
+#hat_blank,#clothes_blank{
+  width: 5.5rem;
+}
+
+#tab1-1:checked ~ .segmented-control__color{
+  transform: translateX(0);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab1-2:checked ~ .segmented-control__color{
+  transform: translateX(6.8rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab1-3:checked ~ .segmented-control__color{
+  transform: translateX(13.6rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab1-4:checked ~ .segmented-control__color{
+  transform: translateX(20.4rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+#tab1-5:checked ~ .segmented-control__color{
+  transform: translateX(27.2rem);
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}

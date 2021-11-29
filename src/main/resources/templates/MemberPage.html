@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+  	<meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    
+    <style>
+    .swal2-popup.swal2-modal {
+        font-size: 12px; 
+    }
+    .swal2-modal .swal2-title {
+        font-size: 28px;
+    }
+    .swal2-modal button {
+        padding: 3px 6px;
+        border: none;
+    }
+	</style>
+    <!-- 字型 -->
+   <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap');
+    </style>
+    
+    <!-- 會員Css -->
+    <link rel="stylesheet" th:href="@{/memberPage/css/MemberPage.css}">
+    <title>MemberPage</title>
+</head>
+<body>
+    <div class="myHeader">
+    	<header th:replace="fragments/header::myHeader"></header>
+    </div>
+    
+    <div class="main">
+<!--     header -->
+        <!-- 顯示範圍 -->
+        <div class="range">
+            <!-- 左方資訊 -->
+            <div class="left">
+                <!-- 大頭貼 -->
+                <div class="head">
+                    <img class="headPic" th:src="@{${avatar.imagePath}}" alt="headpic">
+                </div>
+                <div class="name">
+                    <p th:if= "${user.nickName}" th:text ="${user.nickName}"></p>
+                    <p th:if= "${user.nickName.empty}" th:text ="${user.fullName}"></p>
+                    <!-- 名字旁帽子 -->
+                    <img th:src="@{/memberPage/img/mm.png}" alt="smallName_pic">
+                </div>
+                <!-- 個人資訊 -->
+                <div class="personInfo">
+                    <div class="simpleInfo">
+                        <div class="dateMail">
+                            <p th:text ="${user.birthday}"/>
+                            <p th:text ="${user.email}"/>
+                        </div>
+                        <!-- 日記連結 -->
+                        <a th:href="@{/diary_homepage/1}" class="dailypic">
+                            <img th:src="@{/memberPage/img/PngItem_1145674.png}" width="42px" height="40px" alt="smallDaily_pic">
+                        </a>
+                    </div>
+                    <!-- 身體資訊 -->
+                    <div class="bodyInfo">
+                        <table class="bodyTable">
+                            <tr>
+                                <td>
+                                    <strong>Height</strong>
+                                    <p th:text ="${healthRecord.height}"/>
+                                </td>
+                                <td>
+                                    <strong>TDEE</strong>
+                                    <p th:text ="${healthRecord.TDEE}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>BMI</strong>
+                                    <p th:text ="${healthRecord.BMI}"/>
+                                </td>
+                                <td>
+                                    <strong>BMR</strong>
+                                    <p th:text ="${healthRecord.BMR}"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>BFP</strong>
+                                    <p th:text ="${healthRecord.BFP}"/>
+                                </td>
+                                <td>
+                                    <strong>FFMI</strong>
+                                     <p th:text ="${healthRecord.FFMI}"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="twiceBtn">
+                    <form method="POST" th:action="@{/logout}">
+                    	<input type="submit" class="logOut" value="LOG OUT">
+                    </form>
+                    <form method="GET" th:action="@{/editUser}">
+                    	<input type="submit" class="editProfile" value="EDIT PROFILE">
+                    </form>
+                    
+                </div>
+            </div>
+            <!-- 右方資訊 -->
+            <div class="right">
+                <!-- 右上 -->
+                <div class="top">
+                    <div class="task">
+                         <!-- 右上左 -->
+                        <div class="taskL">
+                            <div class="today" th:text ="${today}"> 
+                            </div>
+                            <div class="progressBar">
+                                <div class="taskInfo">
+                                    <p>Tasks to do</p> 
+                                    <p id="progressNumber"></p>
+                                </div>
+                                <canvas id="taskProgressBar" width="490" height="15">
+                                    <!-- Js catch progress data -->
+                                </canvas>
+                            </div>
+                        </div>
+                         <!-- 右上右 -->
+                        <div class="taskR">
+                            <div>
+                                <div class="displyTask">
+                                    <p th:text ="${calGain}"></p>
+                                </div>
+                                <label>CAL GAIN</label>
+                            </div>
+                            <div>
+                                <div class="displyTask">
+                                    <p th:text ="${calLost}"></p>
+                                </div>
+                                <label>CAL LOST</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 右下 -->
+                <div class="down">
+                    <!-- 右下左 -->
+                    <div class="dl">
+                        <!-- 目標欄 -->
+                        <div class="goal">
+                            <!-- 目標欄上 -->
+                            <div class="goalUp">
+                                <Label>Personal Goal</Label>
+                                <button class="addPersonGoal"><img src="/diary/img/Icon_add.svg" alt=""></button>
+                            </div>
+                             <!-- 目標欄中 -->
+                            <div class="goalMid">
+                                <div class="weightBox">
+                                <div>
+                                    <p th:text ="${personalGoal.startWeight} + 'KG'"></p>
+                                    <span class="weightAnnotation">Start</span>
+                                </div>
+                                <div>
+								<!-- 未完成 -->
+                                	<div th:if="${healthRecord.weight > personalGoal.goalWeight}">
+	                                    <p id="centerFocus" th:text ="${healthRecord.weight} + 'KG'"></p>
+	                                        <span class="weightAnnotation">
+	                                            Current<br>Weight
+	                                        </span>
+                                     </div>
+								<!-- 完成 -->
+                                     <div th:if="${healthRecord.weight <= personalGoal.goalWeight}" style="color: #85FF9E; font-size: 16px">
+                                		<br>
+                                		<p id="centerFocus" th:text ="${healthRecord.weight} + 'KG'" style="color: #6460ff; line-height: 6px"></p>
+                                		<br>
+                                		<p>Congratulations !</p>
+                                		<p>You completed the goal .</p>
+                               		</div>
+                                </div>
+                                <div>
+                                    <p th:text ="${personalGoal.goalWeight} + 'KG'"></p>
+                                        <span class="weightAnnotation">
+                                            Goal
+                                        </span>
+                                </div>
+                                </div>
+                            </div>
+                             <!-- 目標欄下 -->
+                            <div class="goalDown">
+                                <div class="startDate">
+                                    <strong>Start Date</strong>
+                                    <div class="displyGoal">
+                                        <p th:text ="${personalGoal.createDate}"></p>
+                                    </div>
+                                </div>
+                                <div class="totalLost">
+                                    <strong>Total Lost</strong>
+                                    <div class="displyGoal">
+                                        <p th:text ="${personalGoal.totalLost}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Canvas -->
+                        <div class="canvasBox">
+                            <strong class="canvasTitle">Exercise per week</strong>
+                            <canvas id="canvas" width="525" height="200">
+                                hopefully you can't see this. If you do, get Google Chrome.
+                              </canvas>
+                        </div>
+                    </div>
+                     <!-- 右下右 -->
+                    <div class="dr">
+                        <div class="train">
+                            <strong>Training Of Today</strong>
+                            <!-- Thymeleaf will foreach here ; 
+                                assign background-color、src、activityName-->
+							<div class="activityBox" id="scrollbarStyle">
+<!-- 									<div th:if="${activityStatus}" th:each="task : ${activityStatus}" -->
+<!-- 										th:with="color1='#2e1ed3',color2='#6460ff'"> -->
+									<div th:if="${activityStatus}" th:each="task : ${activityStatus}"
+										th:with="color1='#ccccff',color2='#2e1ed3'">
+										
+										<!--                             		done -->
+										<div class="activity" th:if="${task.key.status != '未執行'}"
+											th:style="'background-color:'+ ${color1}">
+<!-- 											<a th:href="@{'/fit-activity/'+ ${task.key.id} }"> -->
+												<img id="cmopletedPic" th:src="@{/images/finishl.svg}" alt="cmopleted_Pic">
+												<img id="activityPic" th:src="@{${task.value.imagePath}}" alt="activity_Pic">
+												<p id="activityName" th:text="${task.value.name}"></p>
+<!-- 											</a> -->
+										</div>
+										<!-- 	                                undone -->
+										<div class="activity" th:if="${task.key.status == '未執行'}"
+											th:style="'background-color:'+ ${color2}">
+											<a th:href="@{'/fit-activity/'+ ${task.key.id} }">	
+												<img id="activityPic" th:src="@{${task.value.imagePath}}" alt="activity_Pic">
+												<p id="activityName" th:text="${task.value.name}"></p>
+											</a>
+										</div>
+									
+									</div>
+								</div>
+							<!-- 日曆連結 -->
+                            <a th:href="@{/calendar/calendar}" class="goCalendar">
+                                <p>...</p> 
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="editGoal">
+                <form th:action="@{/editPersonGoal}" class="goalForm" method="POST">
+                        <button type="button" class="close">&times;</button>
+                        <label>NEW GOAL</label>
+                        <input type="number" name="editWeight" th:value="${personalGoal.goalWeight}" class="editColumn" min="40.00" max="300.00" step="0.01" required="required">                   
+                        <input type="submit" value="SET UP" class="setUP">  
+                        <div class="resultMessage">
+                        	<p th:if="${updateResult == 'error'}" style="color: red; font-size: 14px">
+            					Already completed the goal.
+        					</p>
+        					<p th:if="${updateResult == 'success'}" style="color: green; font-size: 14px">
+            					Update success.
+        					</p>
+                        </div>
+                </form>
+        </div>
+        
+       
+    </div> <!-- main end -->
+    
+    <!-- footer -->
+<!--     <div class="footer"></div> -->
+    <footer th:replace="fragments/footer::myFooter"></footer>
+    
+    <div class="overlay hidden"></div>
+    <script type="text/javascript" th:src="@{\memberPage\js\taskCanvas.js}"></script>
+    <script type="text/javascript" th:src="@{\memberPage\js\MemberPage.js}"></script>
+    <script type="text/javascript" th:src="@{\memberPage\js\bodyCanvas.js}"></script>
+    <script th:inline="javascript">
+    	var message = /*[[${updateMessage}]]*/ 'default';
+
+    	if(message == 'editUserSuccess') alertEditUser();
+    	if(message == 'editBodyInfoSuccess') alertEditBodyInfo();
+
+    	function alertEditUser() {
+            Swal.fire(
+                "Update Result", //title 
+                "Upadate User Information success.", //message
+                "success" //圖示 success/info/warning/error/question
+                //圖示範例：https://sweetalert2.github.io/#icons
+            );
+        }
+        
+    	function alertEditBodyInfo() {
+            Swal.fire(
+                "Update Result",
+                "Upadate Body Information success.", 
+                "success" 
+                
+            );
+        }
+    </script>
+</body>
+</html>

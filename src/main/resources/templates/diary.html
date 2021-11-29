@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary</title>
+    <link rel="stylesheet" href="/diary/css/diaryStyle.css">
+    <link rel="stylesheet" href="/diary/css/bootstrap.min.css">
+<!--     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  </head>
+  <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100&display=swap');
+    </style>
+<body>
+<!--Menu Start-->
+<header th:replace="fragments/header::myHeader"></header>
+        <div class="blank"></div>
+<!--Menu End-->
+
+
+<!--Main Start-->
+<div class="main container">
+ <!-- Button  Start-->
+  <th:block th:if="${pageState == 'allDiary'}">
+    <div th:if="${!isDiary}" class="iconEdit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <img src="/diary/img/Icon_add.svg" alt="">
+      </div>
+    <div th:if="${isDiary}" class="iconEdit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <img src="/diary/img/Icon_edit.svg" alt="">
+      </div>
+  </th:block>
+<!--     <button th:if="${!isDiary}" type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+<!--      ADD -->
+<!--     </button> -->
+
+<!-- 	<button th:if="${isDiary}" type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+<!-- 		EDIT -->
+<!-- 	</button> -->
+
+  <div class="row form">
+  <!--Left Main Start-->
+    <div class="left-main col-2 mt-3" style="text-align: left;">
+
+	
+
+      <!-- 今日日記編輯 -->
+    <th:block th:if="${pageState == 'allDiary'}">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<form th:action="@{/processDiaryUpdate}" class="add-diary" th:object="${todayDailyRecord}" method="post" enctype="multipart/form-data">
+			<div class="modal-content">
+			<div class="modal-header">
+        <h5 th:if="${!isDiary}" class="modal-title" id="exampleModalLabel" style="text-align: center;">Create a Dairy</h5>
+        <h5 th:if="${isDiary}" class="modal-title" id="exampleModalLabel" style="text-align: center;">Update today's Dairy</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="food-edit">
+				<div class="item">
+					<div th:if="${activityStatus}" th:each="task : ${activityStatus}"
+										th:with="color1='#ccccff',color2='#2e1ed3'">
+										
+										<!--                             		done -->
+
+										<div class="activity" th:if="${task.key.status != '未執行'}"
+											th:style="'background-color:'+ ${color1}">
+											
+												<img id="cmopletedPic" th:src="@{/images/finishl.svg}" alt="cmopleted_Pic">
+												<img id="activityPic" th:src="@{${task.value.imagePath}}" alt="activity_Pic">
+												<p id="activityName" th:text="${task.value.name}" style="padding-bottom: 10px;"></p>
+											
+										</div>
+										<!-- 	                                undone -->
+
+										<!-- <div class="activity" th:if="${task.key.status == '未執行'}"
+											th:style="'background-color:'+ ${color2}">
+											<a th:href="@{'/fit-activity/'+ ${task.key.id} }">	
+												<img id="activityPic" th:src="@{${task.value.imagePath}}" alt="activity_Pic">
+												<p id="activityName" th:text="${task.value.name}"></p>
+											</a>
+										</div> -->
+									
+					</div>
+				</div>
+				<div class="item">
+					<select id="myTimePeriod">
+						<option th:each="timePeriod : ${timePeriods}" th:value="${timePeriod.id}" th:utext="${timePeriod.name}">
+					</select>
+					<div class="food-plus" id="addFoodBtn" style="float:right;">
+							<img src="/diary/img/Icon_add.svg" alt="">
+						</div>
+					<select id="myFood">
+						<option th:each="food : ${foods}" th:value="${food.id}" th:utext="${food.name} + ' ' + ${food.serving} + ' ' + ${food.kcal} + ' CAL'">
+					</select>
+					
+					<div class="meal-container">
+						<div th:if="${meals}" th:each="meal: ${meals}" 
+						th:utext="${meal.timePeriod.name} + '--' + ${meal.food.name} + '  <button type=' + 'button'+ ' class=' + 'deleteClass' + ' value=' + ${meal.id} + '>Delete</button>'">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+
+			<div class="modal-body" style="text-align: left;">
+				<p>Diary title:</p>
+ 				<input type="text" class="form__input" placeholder="Type anything..." th:field="*{title}">
+				<p>DIARY:</p>
+				<textarea class="diary__input" rows="5" cols="50" th:field="*{content}"></textarea>
+
+				<p>Date:</p>
+				<input class="form__input"  type="date" id="date" th:field="*{createdDate}" readonly/>
+
+				<p><Picture>Picture:</p>
+				<input type="file" name="image" accept="image/*">
+			
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				<button type="submit" class="btn btn-primary">Save changes</button>
+			</div>
+			</div>
+			<input type="hidden" name="mealHidden" value="last">
+		</form>
+      </div>
+    </div>
+    </th:block>
+
+
+
+
+
+
+
+
+
+          <!-- 以前日記編輯 -->
+          <div class="modal fade" id="oldModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <form th:action="@{/processDiaryUpdate}" class="add-diary" method="post" enctype="multipart/form-data">
+            <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel" style="text-align: center;">Update Dairy</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="food-edit">
+              <div class="item" id="old-diary-activity">
+                <div id="activity-color" with="color1='#ccccff',color2='#2e1ed3'">
+                
+                <!--                             		done -->
+
+                <div class="activity" style="background-color:#ccccff;">
+                 
+                  
+                </div>
+                <!-- 	                                undone -->
+
+                <!-- <div class="activity" th:if="${task.key.status == '未執行'}"
+                  th:style="'background-color:'+ ${color2}">
+                  <a th:href="@{'/fit-activity/'+ ${task.key.id} }">	
+                    <img id="activityPic" th:src="@{${task.value.imagePath}}" alt="activity_Pic">
+                    <p id="activityName" th:text="${task.value.name}"></p>
+                  </a>
+                </div> -->
+              
+              </div>
+            </div>
+              <div class="item" id="old-diary-meal">
+                <select id="myTimePeriod">
+                  <option th:each="timePeriod : ${timePeriods}" th:value="${timePeriod.id}" th:utext="${timePeriod.name}">
+                </select>
+                <div class="food-plus" id="addFoodBtn" style="float:right;">
+                    <img src="/diary/img/Icon_add.svg" alt="">
+                  </div>
+                <select id="myFood">
+                  <option th:each="food : ${foods}" th:value="${food.id}" th:utext="${food.name}">
+                </select>
+              <div class="meal-container"></div>
+                
+              </div>
+            </div>
+            
+      
+            <div class="modal-body" style="text-align: left;">
+              <p>Diary title:</p>
+               <input type="text" class="form__input" name="diaryTitle" placeholder="Type anything..." >
+              <p>DIARY:</p>
+              <textarea class="diary__input" name="diaryContent" rows="5" cols="50" ></textarea>
+      
+              <p>Date:</p>
+              <input class="form__input"  type="date" id="date"  readonly/>
+      
+              <!-- <p><Picture>Picture:</p>
+              <input type="file" name="image" accept="image/*"> -->
+            
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+            <input type="hidden" name="mealHidden" value="last">
+          </form>
+            </div>
+          </div>
+          <!-- Button  End-->
+          <!--選單 Start--> 
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Button  End-->
+    <!--選單 Start--> 
+    <div class="open_line"  >
+  
+      <div th:each="year: ${#numbers.sequence(#dates.year(oldestDiaryDate),#dates.year(currentDate))}" class="has_children">
+        <dt with="firstArticle=2222">[[${year}]]</dt>
+        
+            <a th:each="month: ${#numbers.sequence(1,12)}" class="ch" th:href="'/diary_homepage/1?year=' + ${year} +'&month=' + ${month}">[[${month}]]</a>
+      </div>
+      <a class="has_children" href="/diary_homepage/1" style="font-weight: 700;color: #2e1ed3;">ALL</a>
+    </div>
+   
+
+
+    </div>
+
+    <!-- 選單  End-->
+  <!--Left Main End-->
+
+
+  <!--Right Main Start--> 
+    <div class="right-main col-10 mt-5 ">
+
+
+      <div class="mb-3 row" th:each="dailyRecord : ${dailyRecords}">
+  
+          <div class=" col-md-8 d-flex align-items-stretch diarys" th:id="${dailyRecord.id}">
+            <div class="card-body diarys-style"  data-bs-toggle="modal" data-bs-target="#oldModal">
+              <h5 class="card-title" th:utext="${dailyRecord.title} + '  ' + ${dailyRecord.createdDate}">diary title</h5>              
+              <p class="card-text" th:utext="${dailyRecord.content}"></p>
+              <p class="food" th:each="meal : ${dailyRecord.meals}" th:utext="${meal.timePeriod.name} + ': ' + ${meal.food.name} + ' ' + ${#numbers.formatInteger(meal.food.kcal,0)} + ' cal'"></p>
+              <p class="fitAchieve" th:each="fitAchieve : ${dailyRecord.fitAchieves}" th:utext="${fitAchieve.fitActivity.name} + ': ' + ${fitAchieve.status}"></p>
+              <p class="card-date"><small class="text-muted" th:utext="${dailyRecord.createdDate}">2021/8/4</small></p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <img th:each="diaryPhoto : ${dailyRecord.diaryPhotos}" th:src="'/image/' + ${dailyRecord.user.id} + '/' + ${diaryPhoto.fileName}"  width="307.48" height="193.08" class="img-fluid rounded-start" alt="...">
+          </div>
+
+      </div>
+      
+      
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mb-3">
+          <th:block th:if="${pageState == 'allDiary'}">
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+
+        
+            <th:block th:if="${totalPages != 0}">
+                <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+                <li class="normalIcon__click page-item"><a class="page-link" th:href="@{'/diary_homepage/' + ${i}}">[[${i}]]</a> </li>
+              </span>
+            </th:block>
+        
+  <!-- <div class="normalIcon__click"> -->
+  <!--           <img src="./img/normalIcon/left_click.svg" alt=""> -->
+  <!--         </div> -->
+  <!--         <div class="normalIcon__click"> -->
+  <!--           <img src="./img/right click.svg" alt=""> -->
+  <!--         </div> -->
+
+            <li class="page-item">
+              <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </th:block>
+        </ul>
+      </nav>
+      
+
+    </div>
+
+  <!--Right Main End-->
+  </div>
+</div>
+<!--Main Start-->
+
+
+
+
+
+
+
+
+<script src="/diary/js/diaryjs.js"></script>
+<div class="blank"></div>
+<footer th:replace="fragments/footer::myFooter"></footer>
+</body>
+</html>

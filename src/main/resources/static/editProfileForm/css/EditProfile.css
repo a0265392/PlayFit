@@ -1,0 +1,156 @@
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+.myHeader {
+	width: 100%;
+	min-width: 1150px;
+	height: 80px;
+	/*background-color: #6460ff;*/
+	background-color: white;
+
+}
+
+.main {
+  width: 100%;
+  height: 740px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  width: 100%;
+  min-width: 1150px;
+  height: 80px;
+  background-color: #6460ff;
+}
+
+/* 修改個人資料表單 */
+.editForm {
+  width: 520px;
+  height: 640px;
+  border-radius: 0px 25px 25px 25px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.15);
+  z-index: 3;
+
+  background-color: rgba(235, 238, 248, 0.87);
+  border-left: 6px dashed rgba(0, 0, 0, 0.12);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* 表單顯示範圍 */
+.formRange {
+  width: 90%;
+  height: 95%;
+  /* border: 1px red solid; */
+
+  display: flex;
+  justify-content: center;
+}
+
+/* Form title */
+.formRange label {
+  font-size: 32px;
+  color: #6460ff;
+}
+
+/*  修改 Table */
+.formRange table {
+  width: 100%;
+  text-align: left;
+  border-spacing: 45px 15px;
+  font-size: 18px;
+
+  align-items: center;
+}
+/* 修改欄位 */
+.editColumn {
+  width: 190px;
+  height: 33px;
+  font-size: 14.5px;
+
+  background-color: rgba(255, 255, 255, 0.6);
+
+  border: 3px solid #6460ff;
+  border-radius: 20px;
+}
+
+/* 地址欄 */
+.long {
+  width: 438px;
+  height: 33px;
+  font-size: 14.5px;
+
+  background-color: white;
+
+  border: 3px solid #6460ff;
+  border-radius: 20px;
+}
+/* 提交按鈕 */
+#confirmSubmit {
+  width: 40%;
+  height: 40px;
+
+  background-color: white;
+  border-radius: 20px;
+
+  border: 3px solid #6460ff;
+
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+/* 連結範圍 */
+.hrefSelect {
+  width: 170px;
+  height: 400px;
+
+  background-color: rgba(235, 238, 248, 0.87);
+
+  position: relative;
+  bottom: 120px;
+
+  border-radius: 25px 0 0 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+/* 連結 */
+.editHref {
+  width: 160px;
+  height: 110px;
+  background-color: #6460ff;
+
+  font-size: 18px;
+  color: #eeeeee;
+  text-align: center;
+
+  border-radius: 30px 0 0 30px;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.editHref a {
+	color: white;
+	text-decoration: none;
+}
+
+
+
+
+
+
+

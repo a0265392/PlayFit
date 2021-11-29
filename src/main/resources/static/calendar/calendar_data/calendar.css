@@ -1,0 +1,501 @@
+div {
+  /* box-shadow: 0 0 0px 2px black inset; */
+}
+
+.header {
+  height: 80px;
+  background: #000;
+}
+.br {
+  height: 140px;
+}
+
+.full-width {
+  width: 100%;
+}
+.div {
+  margin: 0;
+  padding: var(--padding-def);
+}
+
+.div-btn {
+  align-self: flex-end;
+  height: var(--btn-l-height);
+}
+
+.container-fluid,
+.container-xxl,
+.container {
+  /* box-shadow: 0 0 0px 4px red inset; */
+  /* background: grey; */
+  padding: 0;
+  /* padding-left: 100px; */
+  /* padding-right: 100px; */
+  /* max-width: 1920px; */
+  height: max-content;
+  /* >>更改總高 */
+  /* height: 1040px; */
+}
+
+.row {
+  /* height: max-content; */
+  height: 100%;
+
+  width: 100%;
+  margin: 0;
+}
+
+.my-row {
+  flex-direction: column;
+}
+
+.my-col {
+  /* box-shadow: 0 0 0px 2px green inset; */
+  /* height: 500px; */
+  height: min(1000px);
+  /* >>左右間隔 */
+  padding-left: var(--padding-hef);
+  padding-right: var(--padding-hef);
+
+  /* height: max-content; */
+}
+
+.my-col-m {
+  /* height: fit-content;
+  height: max-content; */
+  /* box-shadow: 0 0 0px 2px gold inset; */
+  /* 取消 內元素左右間隔 */
+  padding: 0;
+  /* >>內元素 上下間隔 */
+  padding-bottom: var(--padding-def);
+}
+
+.full-height {
+  /* height: 100%; */
+  /* height: min(100%, 900px); */
+}
+
+.info-col {
+  height: 200px;
+}
+
+.calendar-col {
+  /* height: 400px; */
+  height: calc(100% - 200px);
+}
+
+.calendar-inter {
+  /* box-shadow: 0 0 0px 1px blue inset; */
+  width: 100%;
+
+  height: 100%;
+
+  background-color: var(--purple2);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.fit-today {
+  /* box-shadow: 0 0 0px 1px blue inset; */
+  display: flex;
+  /* 滾動 */
+  /* overflow-y: scroll; */
+
+  height: 100%;
+  padding-bottom: 0;
+
+  /* 垂直 */
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+
+  /* 固定加號 */
+  position: relative;
+}
+
+.scroll {
+  overflow-y: scroll;
+}
+
+/* 當日 健身項目 -------------------------------------------------- */
+.today-card {
+  width: 100%;
+  height: fit-content;
+  background-color: var(--purple1);
+  margin-bottom: 1.5rem;
+  /* 取消 btn 陰影 */
+  filter: none;
+  border: 0;
+  /* 固定 */
+  position: relative;
+}
+/* 完成的動作 */
+.today-card-finish {
+  background-color: var(--purple3);
+  pointer-events: none;
+}
+/* 完成的icon */
+.finish-icon {
+  width: 35px;
+  position: absolute;
+  left: var(--padding-hef);
+  top: var(--padding-hef);
+}
+
+/* 當日 健身項目內的圖片 */
+/* 未執行 */
+.today-fit {
+  width: 100%;
+  opacity: 0.7;
+}
+/* 已執行 */
+.today-fit-finish {
+  opacity: 0.3;
+}
+
+/* 當日 健身項目內的文字 */
+.today-fit-name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-blod);
+  color: var(--white);
+
+  /* 固定在右下 */
+  position: absolute;
+  left: var(--padding-hef);
+  bottom: var(--padding-hef);
+}
+
+.btn-l {
+  width: 100%;
+  height: 120px;
+  border-radius: var(--div-border-radius);
+
+  font-size: 3rem;
+}
+.align-r {
+  /* display: flex;
+  justify-content: flex-end; */
+  position: absolute;
+  right: var(--padding-hef);
+  bottom: var(--padding-hef);
+}
+.btn {
+  margin-right: 0;
+}
+
+#day {
+  font-size: 4rem;
+  font-weight: var(--font-weight-blod);
+  width: 100%;
+  height: 100px;
+  margin-bottom: var(--margin-horizon);
+  margin-left: 10px;
+}
+
+/* 月達成 */
+.info {
+  /* box-shadow: 0 0 0px 1px blue inset; */
+  width: 100%;
+  /* height: 200px; */
+  height: 100%;
+  padding: 20px 40px;
+  font-weight: var(--font-weight-blod);
+}
+
+.monthly_record {
+  font-size: var(--font-size-xl);
+  height: inherit;
+  display: flex;
+  align-items: center;
+}
+
+/* 達成的值  */
+.monthly_value {
+  font-size: var(--font-size-l);
+  display: flex;
+  align-items: center;
+}
+
+.monthly_icon {
+  width: 25px;
+}
+.value_inter {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+.value_inter h3 {
+}
+/* 數字 */
+.num_value {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-blod);
+}
+
+/* -------------------------------------- */
+
+/* model 彈出視窗 */
+.modal-content {
+  border-radius: var(--btn-border-radius);
+  background-color: var(--purple2);
+  border: 0;
+}
+
+.modal-header {
+  border-top-left-radius: var(--btn-border-radius);
+  border-top-right-radius: var(--btn-border-radius);
+  border: 0;
+}
+
+.modal-footer {
+  border: 0;
+}
+
+/* 彈出視窗body */
+.body {
+  padding: 0;
+}
+
+/* 彈出視窗實際內容 */
+.modal-bg {
+  background-color: var(--purple2);
+  height: 300px;
+  padding: 10px;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* flex-wrap: wrap; */
+  width: inherit;
+  /* 滾動 */
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.modal-top {
+  background-color: aqua;
+  /* width: 100%; */
+  height: inherit;
+  /* flex: 1; */
+  /* padding: 20px; */
+
+  display: flex;
+  /* flex-wrap: nowrap; */
+}
+
+.modal-button {
+  background-color: burlywood;
+  height: inherit;
+  /* flex: 1; */
+
+  display: flex;
+}
+
+/* 健身部位 */
+.fit-part {
+  background-color: var(--purplebg);
+  height: 100%;
+  width: 400px;
+  border-radius: 20px;
+
+  margin-left: 10px;
+  margin-right: 10px;
+  /* padding: 20px; */
+  /* 水平內顯示為區塊 */
+  display: inline-block;
+  /* display: inline; */
+}
+/* 會員樣式 */
+.prime-fit {
+  opacity: 50%;
+}
+
+.fit-part:hover {
+  background-color: var(--purple1);
+  transition: 0.2s;
+}
+
+#fits-form {
+  background-color: aliceblue;
+  height: inherit;
+  width: 100%;
+}
+
+input + label:hover {
+  transform: scale(1);
+  background: var(--purple3);
+}
+
+/* input + label:after {
+content: '';
+} */
+
+input:checked + label {
+  /* transform: scale(1); */
+  /* background-color: darkgreen; */
+  box-shadow: 0 0 0px 7px var(--purple1) inset;
+}
+
+input:checked + label:hover {
+  transform: scale(1);
+  /* transform: scale(0.95); */
+}
+
+input + label .fit-a {
+  background-color: darkgoldenrod;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* 多選 label 內 div   */
+/* input+label .fit-a:hover {
+    background-color: sandybrown;
+} */
+
+input:checked + label .fit-a {
+  /* transform: scale(1); */
+  background-color: darkgreen;
+}
+
+label {
+  cursor: pointer;
+}
+
+.fit-a-top {
+  /* background-color: grey; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.fit-a-button {
+  /* width: 100%;
+  height: 30%; */
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 2rem;
+  font-weight: var(--font-weight-blod); */
+  color: black;
+  position: sticky;
+  font-size: 3rem;
+  bottom: 20px;
+  /* right: 30px; */
+  font-weight: var(--font-weight-blod);
+}
+
+.fit-activity {
+  width: 100%;
+}
+
+.prime-activity {
+  opacity: 50%;
+}
+
+.model-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-1 {
+  position: fixed;
+  height: calc(var(--btn-width-height) / 2);
+  background-color: var(--white);
+  border-radius: 2px;
+  width: 3.5px;
+  transform: rotate(45deg);
+}
+
+.close-2 {
+  position: fixed;
+  height: calc(var(--btn-width-height) / 2);
+  background-color: var(--white);
+  border-radius: 2px;
+  width: 3.5px;
+  transform: rotate(-45deg);
+}
+
+.today-height {
+  height: calc(100% - 160px);
+}
+
+/* ----- */
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+/* 不能點選 */
+.mouse {
+  cursor: default !important;
+}
